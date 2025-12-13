@@ -45,16 +45,16 @@ void	release_forks(t_philo *philo)
 	right = (philo->id + 1) % philo->params->num_philos;
 	if (philo->id % 2 == 1)
 	{
-		pthread_mutex_lock(&philo->params->forks[left]);
+		pthread_mutex_unlock(&philo->params->forks[left]);
 		print_action(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->params->forks[right]);
+		pthread_mutex_unlock(&philo->params->forks[right]);
 		print_action(philo, "has taken a fork");
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->params->forks[right]);
+		pthread_mutex_unlock(&philo->params->forks[right]);
 		print_action(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->params->forks[left]);
+		pthread_mutex_unlock(&philo->params->forks[left]);
 		print_action(philo, "has taken a fork");
 	}
 }
