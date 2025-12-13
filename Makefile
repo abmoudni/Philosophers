@@ -1,9 +1,10 @@
+
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -pthread -g #-Werror
+CFLAGS = -Wall -Wextra -pthread #-g -Werror
 
-SRC = main.c init.c actions.c monitor.c utils.c philosopher.c destroy.c ft_usleep.c
+SRC = actions.c destroy.c init.c main.c monitor.c parse_args.c philo.c start.c utils.c
 OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
