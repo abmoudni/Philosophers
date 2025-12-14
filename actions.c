@@ -71,7 +71,7 @@ void	think(t_philo *philo)
 
 	params = philo->params;
 	print_action(philo, "is thinking");
-	if (philo->id % 2
+	if (params->num_philos % 2
 		&& params->time_to_eat >= params->time_to_sleep - 10)
 		ft_usleep(params, params->time_to_eat - params->time_to_sleep + 10);
 }
