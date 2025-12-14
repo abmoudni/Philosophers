@@ -48,14 +48,12 @@ int	ft_atoi(const char *str)
 	return (res);
 }
 
-void	ft_usleep(t_philo *philo, long time)
+void	ft_usleep(t_params *params, long time)
 {
 	long		curr_time;
-	t_params	*params;
 
-	params = philo->params;
 	curr_time = get_time_ms();
-	while (!is_someone_died(philo->params))
+	while (!is_someone_died(params))
 	{
 		if (time <= (get_time_ms() - curr_time) * 1000)
 			break ;

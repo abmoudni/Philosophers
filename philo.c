@@ -14,7 +14,7 @@ static void	*philo_one(t_philo *philo)
 		if (params->someone_died)
 			break ;
 		pthread_mutex_unlock(&params->someone_died_mtx);
-		ft_usleep(philo, params->time_to_die * 1000);
+		ft_usleep(philo->params, params->time_to_die * 1000);
 	}
 	pthread_mutex_unlock(&params->someone_died_mtx);
 	pthread_mutex_unlock(&params->forks[0]);

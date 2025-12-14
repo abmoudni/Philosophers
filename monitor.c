@@ -63,7 +63,6 @@ static int	all_ate_enough(t_philo *philos)
 
 void	*monitor_routine(void *arg)
 {
-	int			i;
 	t_philo		*philos;
 	t_params	*params;
 

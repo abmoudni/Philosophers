@@ -33,7 +33,7 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->meals_eat_mtx);
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meals_eat_mtx);
-	ft_usleep(philo, philo->params->time_to_eat * 1000);
+	ft_usleep(philo->params, philo->params->time_to_eat * 1000);
 }
 
 void	release_forks(t_philo *philo)
@@ -62,7 +62,7 @@ void	release_forks(t_philo *philo)
 void	go_to_sleep(t_philo *philo)
 {
 	print_action(philo, "is sleeping");
-	ft_usleep(philo, philo->params->time_to_sleep * 1000);
+	ft_usleep(philo->params, philo->params->time_to_sleep * 1000);
 }
 
 void	think(t_philo *philo)

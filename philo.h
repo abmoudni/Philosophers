@@ -67,6 +67,6 @@ void	print_action(t_philo *philo, const char *msg);
 int		is_someone_died(t_params *params);
 long	get_time_ms(void);
 int		ft_atoi(const char *str);
-void	ft_usleep(t_philo *philo, long time);
+void	ft_usleep(t_params *params, long time);
 
 #endif
