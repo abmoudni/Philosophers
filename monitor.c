@@ -11,26 +11,27 @@ static int	check_death(t_philo *philo)
 	return (philo->params->time_to_die <= delta_time);
 }
 
-static void	report_died(t_params *params, int id)
+static void	report_died(t_params *params)
 {
 	pthread_mutex_lock(&params->someone_died_mtx);
 	params->someone_died = 1;
 	pthread_mutex_unlock(&params->someone_died_mtx);
-	pthread_mutex_lock(&params->print_lock);
-	printf("%ld %d died\n", get_time_ms() - params->start_time, id + 1);
-	pthread_mutex_unlock(&params->print_lock);
 }
 
 static int	check_deaths(t_philo *philos)
 {
 	int	i;
-
+	
 	i = 0;
 	while (i < philos->params->num_philos)
 	{
 		if (check_death(&philos[i]))
 		{
-			report_died(philos[i].params, i);
+			pthread_mutex_lock(&philos->params->print_lock);
+			report_died(philos[i].params);
+			printf("%ld %d died\n", \
+				get_time_ms() - philos[i].params->start_time, philos[i].id + 1);
+			pthread_mutex_unlock(&philos->params->print_lock);
 			return (1);
 		}
 		i++;
@@ -74,8 +75,6 @@ void	*monitor_routine(void *arg)
 			break ;
 		usleep(1000);
 	}
-	pthread_mutex_lock(&params->someone_died_mtx);
-	params->someone_died = 1;
-	pthread_mutex_unlock(&params->someone_died_mtx);
+	report_died(params);
 	return (NULL);
 }

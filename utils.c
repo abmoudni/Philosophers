@@ -15,9 +15,12 @@ int	is_someone_died(t_params *params)
 
 void	print_action(t_philo *philo, const char *msg)
 {
-	if (is_someone_died(philo->params))
-		return ;
 	pthread_mutex_lock(&philo->params->print_lock);
+	if (is_someone_died(philo->params))
+	{
+		pthread_mutex_unlock(&philo->params->print_lock);
+		return ;
+	}
 	printf("%ld %d %s\n", \
 		get_time_ms() - philo->params->start_time, philo->id + 1, msg);
 	pthread_mutex_unlock(&philo->params->print_lock);
