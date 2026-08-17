@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abmoudni <abmoudni@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 07:19:21 by abmoudni          #+#    #+#             */
+/*   Updated: 2026/02/27 07:22:38 by abmoudni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -21,7 +32,7 @@ static void	report_died(t_params *params)
 static int	check_deaths(t_philo *philos)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < philos->params->num_philos)
 	{
@@ -29,8 +40,8 @@ static int	check_deaths(t_philo *philos)
 		{
 			pthread_mutex_lock(&philos->params->print_lock);
 			report_died(philos[i].params);
-			printf("%ld %d died\n", \
-				get_time_ms() - philos[i].params->start_time, philos[i].id + 1);
+			printf("%ld %d died\n", get_time_ms()
+				- philos[i].params->start_time, philos[i].id + 1);
 			pthread_mutex_unlock(&philos->params->print_lock);
 			return (1);
 		}
@@ -65,16 +76,14 @@ static int	all_ate_enough(t_philo *philos)
 void	*monitor_routine(void *arg)
 {
 	t_philo		*philos;
-	t_params	*params;
 
 	philos = arg;
-	params = philos->params;
 	while (1)
 	{
 		if (check_deaths(philos) || all_ate_enough(philos))
 			break ;
-		usleep(1000);
+		usleep(50);
 	}
-	report_died(params);
+	report_died(philos->params);
 	return (NULL);
 }

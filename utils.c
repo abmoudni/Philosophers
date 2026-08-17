@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abmoudni <abmoudni@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 07:25:12 by abmoudni          #+#    #+#             */
+/*   Updated: 2026/02/27 07:25:30 by abmoudni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -21,8 +32,8 @@ void	print_action(t_philo *philo, const char *msg)
 		pthread_mutex_unlock(&philo->params->print_lock);
 		return ;
 	}
-	printf("%ld %d %s\n", \
-		get_time_ms() - philo->params->start_time, philo->id + 1, msg);
+	printf("%ld %d %s\n", get_time_ms()
+		- philo->params->start_time, philo->id + 1, msg);
 	pthread_mutex_unlock(&philo->params->print_lock);
 }
 
@@ -58,7 +69,7 @@ void	ft_usleep(t_params *params, long time)
 	curr_time = get_time_ms();
 	while (!is_someone_died(params))
 	{
-		if (time <= (get_time_ms() - curr_time) * 1000)
+		if (time <= get_time_ms() - curr_time)
 			break ;
 		usleep(50);
 	}
